@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agentic Marketplace — The Central Infrastructure of the Agentic Economy</title>
+    <!-- Dynamic high-end procedural 3D neural node favicon -->
+    <link rel="icon" type="image/png" href="" />
+    <script>
+      (function() {
+        window.addEventListener('DOMContentLoaded', () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = 32;
+          canvas.height = 32;
+          const ctx = canvas.getContext('2d');
+          const favicon = document.querySelector('link[rel="icon"]');
+          
+          let angle = 0;
+          
+          function draw() {
+            if (!ctx || !favicon) return;
+            ctx.clearRect(0, 0, 32, 32);
+            
+            // Draw background dark slate circle
+            ctx.fillStyle = '#0a0a0f';
+            ctx.beginPath();
+            ctx.arc(16, 16, 15, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw ambient glowing stroke
+            ctx.strokeStyle = 'rgba(168, 85, 247, 0.4)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(16, 16, 14, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Generate rotating neural points (3 points)
+            const r = 7;
+            const points = [];
+            for (let i = 0; i < 3; i++) {
+              const theta = angle + (i * Math.PI * 2 / 3);
+              const x = 16 + r * Math.cos(theta);
+              const y = 16 + r * Math.sin(theta);
+              points.push({ x, y });
+            }
+            
+            // Draw connections
+            ctx.strokeStyle = 'rgba(168, 85, 247, 0.8)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            ctx.lineTo(points[1].x, points[1].y);
+            ctx.lineTo(points[2].x, points[2].y);
+            ctx.closePath();
+            ctx.stroke();
+            
+            // Draw central core (cyan)
+            ctx.fillStyle = '#06b6d4';
+            ctx.beginPath();
+            ctx.arc(16, 16, 2.5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw node points
+            ctx.fillStyle = '#ffffff';
+            points.forEach(p => {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, 2.0, 0, Math.PI * 2);
+              ctx.fill();
+            });
+            
+            favicon.href = canvas.toDataURL('image/png');
+            angle += 0.035;
+            setTimeout(() => {
+              requestAnimationFrame(draw);
+            }, 50); // Frame limiter to 20fps to be ultra gentle on resources
+          }
+          
+          draw();
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

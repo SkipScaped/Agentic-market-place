@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom theme variables */
+:root {
+  --bg-app: #050508;
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --border-color: rgba(255, 255, 255, 0.06);
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --scrollbar-track: #050508;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.1);
+  --pulse-opacity-1: 0.15;
+  --pulse-opacity-2: 0.25;
+}
+
+.light-theme {
+  --bg-app: #fafafc;
+  --text-primary: #0a0a0f;
+  --text-secondary: #4b5563;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --card-bg: rgba(0, 0, 0, 0.025);
+  --scrollbar-track: #fafafc;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.15);
+  --pulse-opacity-1: 0.04;
+  --pulse-opacity-2: 0.07;
+}
+
+/* Custom global overrides */
+html, body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom scrollbar to keep it ultra-premium */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+  transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.4);
+}
+
+/* Glowing background pulses */
+@keyframes neural-pulse {
+  0%, 100% {
+    transform: scale(1) translate(0px, 0px);
+    opacity: var(--pulse-opacity-1);
+  }
+  33% {
+    transform: scale(1.15) translate(30px, -50px);
+    opacity: var(--pulse-opacity-2);
+  }
+  66% {
+    transform: scale(0.95) translate(-20px, 20px);
+    opacity: var(--pulse-opacity-1);
+  }
+}
+
+.animate-pulse-neural-1 {
+  animation: neural-pulse 15s infinite ease-in-out;
+}
+
+.animate-pulse-neural-2 {
+  animation: neural-pulse 18s infinite ease-in-out reverse;
+}
