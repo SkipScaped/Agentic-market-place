@@ -40,15 +40,10 @@ function FloatingMesh({ type, isHovered, theme }: Card3DCanvasProps) {
 
   const glassMaterialProps = {
     color: theme === "dark" ? "#ffffff" : "#4f46e5",
-    transmission: 0.92,
-    thickness: 1.8,
-    roughness: 0.12,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.08,
-    metalness: 0.0,
-    ior: 1.52,
+    roughness: 0.15,
+    metalness: 0.85,
     transparent: true,
-    opacity: 0.85,
+    opacity: 0.75,
     side: THREE.DoubleSide
   };
 
@@ -75,33 +70,33 @@ function FloatingMesh({ type, isHovered, theme }: Card3DCanvasProps) {
       <group ref={meshRef}>
         {shardPositions.map((pos, idx) => (
           <mesh key={idx} position={new THREE.Vector3(...pos)}>
-            <boxGeometry args={[0.25, 0.25, 0.25]} />
-            <meshPhysicalMaterial {...glassMaterialProps} color={theme === "dark" ? "#f87171" : "#dc2626"} />
+            <boxGeometry args={[0.22, 0.22, 0.22]} />
+            <meshStandardMaterial {...glassMaterialProps} color={theme === "dark" ? "#f87171" : "#dc2626"} />
           </mesh>
         ))}
         {/* Core center broken seed */}
         <mesh>
-          <octahedronGeometry args={[0.25]} />
+          <octahedronGeometry args={[0.22]} />
           <meshStandardMaterial {...coreMaterialProps} color="#ef4444" emissive="#b91c1c" />
         </mesh>
       </group>
     );
   }
 
-  // 2. Dedicated Marketplace: Two interlocking high-glass rings rotating smoothly
+  // 2. Dedicated Marketplace: Two interlocking rings rotating smoothly (optimized geometry)
   if (type === "marketplace") {
     return (
       <group ref={meshRef}>
         <mesh rotation={[Math.PI / 4, 0, 0]}>
-          <torusGeometry args={[0.65, 0.08, 16, 100]} />
-          <meshPhysicalMaterial {...glassMaterialProps} />
+          <torusGeometry args={[0.65, 0.06, 8, 36]} />
+          <meshStandardMaterial {...glassMaterialProps} />
         </mesh>
         <mesh rotation={[-Math.PI / 4, Math.PI / 2, 0]}>
-          <torusGeometry args={[0.55, 0.08, 16, 100]} />
-          <meshPhysicalMaterial {...glassMaterialProps} color={theme === "dark" ? "#06b6d4" : "#0284c7"} />
+          <torusGeometry args={[0.55, 0.06, 8, 36]} />
+          <meshStandardMaterial {...glassMaterialProps} color={theme === "dark" ? "#06b6d4" : "#0284c7"} />
         </mesh>
         <mesh>
-          <sphereGeometry args={[0.18, 32, 32]} />
+          <sphereGeometry args={[0.18, 12, 12]} />
           <meshStandardMaterial {...coreMaterialProps} />
         </mesh>
       </group>
@@ -114,7 +109,7 @@ function FloatingMesh({ type, isHovered, theme }: Card3DCanvasProps) {
       <group ref={meshRef}>
         <mesh ref={crystalRef}>
           <octahedronGeometry args={[0.75]} />
-          <meshPhysicalMaterial {...glassMaterialProps} />
+          <meshStandardMaterial {...glassMaterialProps} />
         </mesh>
         <mesh position={[0, Math.sin(1) * 0.1, 0]}>
           <dodecahedronGeometry args={[0.25]} />
@@ -124,45 +119,45 @@ function FloatingMesh({ type, isHovered, theme }: Card3DCanvasProps) {
     );
   }
 
-  // 4. The 1% Standard: A beautiful glassy hollow cylinder or golden ratio disk
+  // 4. The 1% Standard: A beautiful glassy cylinder or golden ratio disk
   if (type === "fees") {
     return (
       <group ref={meshRef}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <cylinderGeometry args={[0.6, 0.6, 0.15, 32, 1, true]} />
-          <meshPhysicalMaterial {...glassMaterialProps} />
+          <cylinderGeometry args={[0.6, 0.6, 0.15, 18, 1, true]} />
+          <meshStandardMaterial {...glassMaterialProps} />
         </mesh>
         {/* Inner thin golden core wire */}
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[0.48, 0.03, 8, 48]} />
+          <torusGeometry args={[0.48, 0.02, 6, 24]} />
           <meshStandardMaterial {...coreMaterialProps} color="#f59e0b" emissive="#d97706" />
         </mesh>
       </group>
     );
   }
 
-  // 5. The Intelligent Mesh: A micro neural system of connected nodes
+  // 5. The Intelligent Mesh: A micro neural system of connected nodes (highly optimized)
   return (
     <group ref={meshRef}>
       <mesh position={[0.45, 0.45, 0]}>
-        <sphereGeometry args={[0.12, 16, 16]} />
-        <meshPhysicalMaterial {...glassMaterialProps} />
+        <sphereGeometry args={[0.12, 8, 8]} />
+        <meshStandardMaterial {...glassMaterialProps} />
       </mesh>
       <mesh position={[-0.45, -0.45, 0]}>
-        <sphereGeometry args={[0.12, 16, 16]} />
-        <meshPhysicalMaterial {...glassMaterialProps} />
+        <sphereGeometry args={[0.12, 8, 8]} />
+        <meshStandardMaterial {...glassMaterialProps} />
       </mesh>
       <mesh position={[0.45, -0.45, 0.2]}>
-        <sphereGeometry args={[0.12, 16, 16]} />
-        <meshPhysicalMaterial {...glassMaterialProps} color="#06b6d4" />
+        <sphereGeometry args={[0.12, 8, 8]} />
+        <meshStandardMaterial {...glassMaterialProps} color="#06b6d4" />
       </mesh>
       <mesh position={[-0.45, 0.45, -0.2]}>
-        <sphereGeometry args={[0.12, 16, 16]} />
-        <meshPhysicalMaterial {...glassMaterialProps} color="#a855f7" />
+        <sphereGeometry args={[0.12, 8, 8]} />
+        <meshStandardMaterial {...glassMaterialProps} color="#a855f7" />
       </mesh>
       {/* Central hub sphere */}
       <mesh>
-        <sphereGeometry args={[0.22, 32, 32]} />
+        <sphereGeometry args={[0.22, 12, 12]} />
         <meshStandardMaterial {...coreMaterialProps} />
       </mesh>
     </group>
@@ -195,8 +190,8 @@ export default function Card3DCanvas({ type, isHovered, theme }: Card3DCanvasPro
     <div className="w-full h-32 md:h-36 relative select-none">
       <Canvas
         camera={{ position: [0, 0, 2.2], fov: 45 }}
-        gl={{ antialias: true, alpha: true }}
-        dpr={[1, 1.5]}
+        gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
+        dpr={1}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >
         <ambientLight intensity={theme === "dark" ? 0.75 : 1.2} />

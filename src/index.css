@@ -42,20 +42,23 @@ html, body {
   transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Custom scrollbar to keep it ultra-premium */
+/* Custom Matrix Cyberpunk scrollbar with glowing transitions */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 9px;
 }
 ::-webkit-scrollbar-track {
   background: var(--scrollbar-track);
+  border-left: 1px solid var(--border-color);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.35) 0%, rgba(16, 185, 129, 0.4) 100%);
+  border: 2px solid var(--scrollbar-track);
   border-radius: 9999px;
-  transition: background 0.3s ease;
+  box-shadow: inset 0 0 4px rgba(16, 185, 129, 0.2);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(168, 85, 247, 0.4);
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.8) 0%, rgba(16, 185, 129, 0.85) 100%);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
 }
 
 /* Glowing background pulses */

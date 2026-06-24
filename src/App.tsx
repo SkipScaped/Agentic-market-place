@@ -3,9 +3,37 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/**
+ * ----------------- BACKEND ARCHITECT PLAN -----------------
+ * TO THE BACKEND / FULL-STACK ENGINEER:
+ * 
+ * If you are preparing to elevate this high-fidelity React MVP into a production product:
+ * 
+ * 1. BACKEND ROUTING ENGINE (Express / NestJS):
+ *    - Configure an Express server (or similar node framework) using the templates outlined in the
+ *      React/Vite system guide. Add `/api/waitlist` to process signups directly to a persistent DB instead of localStorage.
+ *    - Endpoint layout:
+ *      * POST `/api/waitlist/join` -> Receives { email, referralToken }. Validates email syntax, checks for duplicates,
+ *        hashes the source IP, updates DB, generates a custom waitlist queue number, and returns it.
+ *      * GET `/api/waitlist/status?email=...` -> Fetches real-time status and referral counter.
+ * 
+ * 2. CHOSEN DATA PERSISTENCE LAYER:
+ *    - RELATIONAL: If using PostgreSQL (via Cloud SQL as documented in the `/skills/system_skills/cloudsql-setup/SKILL.md` skill):
+ *      * Spin up PostgreSQL, install Drizzle ORM, and define a relational waitlist schema with unique indices on email.
+ *    - DOCUMENT-BASED: If using Google Firestore (via `/skills/system_skills/firebase-skill/SKILL.md` skill):
+ *      * Bootstrap Firestore database. Set up security rules prohibiting public writes to credentials, while allowing waitlist appends.
+ * 
+ * 3. AGENT VALIDATION SECURE RUNTIME (Sandboxing):
+ *    - Since this is an Agentic Marketplace, developers will register API execution routes.
+ *    - When an Agent calls another Agent, proxy the programmatic query through a secure runtime server.
+ *    - Implement API rate limiting (e.g., using Redis) and token bucket algorithms to prevent DDoS vectors.
+ * -----------------------------------------------------------
+ */
+
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import AgenticMesh from "./components/AgenticMesh";
+import MatrixBackground from "./components/MatrixBackground";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import ProblemSolution from "./components/ProblemSolution";
@@ -51,6 +79,9 @@ export default function App() {
     >
       {/* 1. Fixed Interactive 3D Background ("The Agentic Mesh") */}
       <AgenticMesh theme={theme} />
+
+      {/* 1b. Matrix Rain Animated Digital Core Stream */}
+      <MatrixBackground theme={theme} />
 
       {/* 2. Soft atmospheric background glowing lights */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-15">
